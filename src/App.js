@@ -178,24 +178,63 @@ import './App.css';
 // }
 
 
+// export default class App extends Component {
+// 	render() {
+// 		return <MailMessages unreadMessages={messages}/>;
+// 	}
+// }
+// const messages = ['React', 'Re: React', 'Re:Re: React'];
+
+// class MailMessages extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.unreadMessages = props.unreadMessages;
+// 	}
+// 	render() {
+// 		return (
+// 			<div>
+// 				{this.unreadMessages.length > 0 && <h1>Hello, you have {this.unreadMessages.length} unread messages</h1>}
+// 			</div>
+// 		)
+// 	}
+// }
+
 export default class App extends Component {
 	render() {
-		return <MailMessages unreadMessages={messages}/>;
+		return <Page />;
 	}
 }
-const messages = ['React', 'Re: React', 'Re:Re: React'];
-
-class MailMessages extends Component {
+class Page extends Component {
 	constructor(props) {
 		super(props);
-		this.unreadMessages = props.unreadMessages;
+		this.state = {showWarning: true};
+		this.handleToggleClick = this.handleToggleClick.bind(this);
 	}
+
+	handleToggleClick() {
+		this.setState(state => ({showWarning: !state.showWarning}))
+	}
+
 	render() {
 		return (
 			<div>
-				{this.unreadMessages.length > 0 && <h1>Hello, you have {this.unreadMessages.length} unread messages</h1>}
+				<WarningBanner warn={this.state.showWarning}/>
+				<button onClick={this.handleToggleClick}>
+					{this.state.showWarning ? 'Спрятать' : 'Показать'}
+				</button>
 			</div>
 		)
 	}
 }
 
+function WarningBanner(props) {
+	if (!props.warn) {
+		return null;
+	}
+
+	return (
+		<div className="warning">
+      Предупреждение!
+    </div>
+	)
+}

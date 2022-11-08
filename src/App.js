@@ -60,34 +60,81 @@ import './App.css';
 // 	return <div className="user-comment-data">{formDate(props.dateComment)}</div>;
 // }
 
+// export default class App extends Component {
+// 	render() {
+// 		return (<Clock />)
+// 	}
+// }
+
+// class Clock extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {date: new Date()};
+// 	}
+// 	componentDidMount() {
+// 		this.timerID = setInterval(() => this.tick(), 1000)
+// 	}
+// 	componentWillUnmount() {
+// 		clearInterval(this.timerID)
+// 	}
+// 	tick() {
+// 		this.setState({
+// 			date: new Date()
+// 		})
+// 	}
+// 	render() {
+// 		return (
+// 			<div>
+// 				<h1>Таймер</h1>
+// 				<h2>Сейчас: {this.state.date.toLocaleTimeString()}</h2>
+// 			</div>
+// 		)
+// 	}
+// }
+
+// export default class App extends Component {
+// 	render() {
+// 		return <Form/>
+// 	}
+// }
+
+// class Form extends Component {
+// 	constructor (props) {
+// 		super(props);
+// 		this.handleDefault = this.handleDefault.bind(this);
+// 	}
+// 	handleDefault(e) {
+// 		e.preventDefault();
+// 		console.log('Форма отправлена');
+// 	}
+// 	render() {
+// 		return (
+// 			<form onSubmit={this.handleDefault}>
+// 				<button type="submit">Отправить</button>
+// 			</form>
+// 		)
+// 	}
+
+// }
+
+
 export default class App extends Component {
 	render() {
-		return (<Clock />)
+		return <Greeting isLoggedIn={true}/>
 	}
 }
 
-class Clock extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {date: new Date()};
+function Greeting(props) {
+	let isLoggedIn = props.isLoggedIn;
+
+	if (isLoggedIn) {
+		return <UserGreeting/>
 	}
-	componentDidMount() {
-		this.timerID = setInterval(() => this.tick(), 1000)
-	}
-	componentWillUnmount() {
-		clearInterval(this.timerID)
-	}
-	tick() {
-		this.setState({
-			date: new Date()
-		})
-	}
-	render() {
-		return (
-			<div>
-				<h1>Таймер</h1>
-				<h2>Сейчас: {this.state.date.toLocaleTimeString()}</h2>
-			</div>
-		)
-	}
+		return <GuestGreeting/>
+}
+function UserGreeting() {
+	return <h1>Hello User!</h1>
+}
+function GuestGreeting() {
+	return <h1>Enter User Name!</h1>
 }

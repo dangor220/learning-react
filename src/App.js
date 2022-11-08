@@ -117,24 +117,85 @@ import './App.css';
 
 // }
 
+// export default class App extends Component {
+// 	render() {
+// 		return <LoginControl />;
+// 	}
+// }
+
+// function Greeting(props) {
+// 	let isLoggedIn = props.isLoggedIn;
+
+// 	if (isLoggedIn) {
+// 		return <UserGreeting />;
+// 	}
+// 	return <GuestGreeting />;
+// }
+// function UserGreeting() {
+// 	return <h1>Hello User!</h1>;
+// }
+// function GuestGreeting() {
+// 	return <h1>Enter User Name!</h1>;
+// }
+
+// class LoginControl extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = { isLoggedIn: false };
+// 		this.handleLoginClick = this.handleLoginClick.bind(this);
+// 		this.handleLogoutClick = this.handleLogoutClick.bind(this);
+// 	}
+// 	handleLoginClick() {
+// 		this.setState({ isLoggedIn: true });
+// 	}
+// 	handleLogoutClick() {
+// 		this.setState({ isLoggedIn: false });
+// 	}
+// 	render() {
+// 		const isLoggedIn = this.state.isLoggedIn;
+// 		let button;
+
+// 		if (isLoggedIn) {
+// 			button = <LogoutButton onClick={this.handleLogoutClick} />;
+// 		} else {
+// 			button = <LoginButton onClick={this.handleLoginClick} />;
+// 		}
+
+// 		return (
+// 			<div>
+// 				<Greeting isLoggedIn={isLoggedIn} />
+// 				{button}
+// 			</div>
+// 		);
+// 	}
+// }
+
+// function LoginButton(props) {
+// 	return <button onClick={props.onClick}>Войти</button>;
+// }
+// function LogoutButton(props) {
+// 	return <button onClick={props.onClick}>Выйти</button>;
+// }
+
 
 export default class App extends Component {
 	render() {
-		return <Greeting isLoggedIn={true}/>
+		return <MailMessages unreadMessages={messages}/>;
+	}
+}
+const messages = ['React', 'Re: React', 'Re:Re: React'];
+
+class MailMessages extends Component {
+	constructor(props) {
+		super(props);
+		this.unreadMessages = props.unreadMessages;
+	}
+	render() {
+		return (
+			<div>
+				{this.unreadMessages.length > 0 && <h1>Hello, you have {this.unreadMessages.length} unread messages</h1>}
+			</div>
+		)
 	}
 }
 
-function Greeting(props) {
-	let isLoggedIn = props.isLoggedIn;
-
-	if (isLoggedIn) {
-		return <UserGreeting/>
-	}
-		return <GuestGreeting/>
-}
-function UserGreeting() {
-	return <h1>Hello User!</h1>
-}
-function GuestGreeting() {
-	return <h1>Enter User Name!</h1>
-}

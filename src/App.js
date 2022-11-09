@@ -177,7 +177,6 @@ import './App.css';
 // 	return <button onClick={props.onClick}>Выйти</button>;
 // }
 
-
 // export default class App extends Component {
 // 	render() {
 // 		return <MailMessages unreadMessages={messages}/>;
@@ -199,42 +198,57 @@ import './App.css';
 // 	}
 // }
 
+// export default class App extends Component {
+// 	render() {
+// 		return <Page />;
+// 	}
+// }
+// class Page extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {showWarning: true};
+// 		this.handleToggleClick = this.handleToggleClick.bind(this);
+// 	}
+
+// 	handleToggleClick() {
+// 		this.setState(state => ({showWarning: !state.showWarning}))
+// 	}
+
+// 	render() {
+// 		return (
+// 			<div>
+// 				<WarningBanner warn={this.state.showWarning}/>
+// 				<button onClick={this.handleToggleClick}>
+// 					{this.state.showWarning ? 'Спрятать' : 'Показать'}
+// 				</button>
+// 			</div>
+// 		)
+// 	}
+// }
+
+// function WarningBanner(props) {
+// 	if (!props.warn) {
+// 		return null;
+// 	}
+
+// 	return (
+// 		<div className="warning">
+//       Предупреждение!
+//     </div>
+// 	)
+// }
+
+const numbers = [1, 2, 3, 4, 5, 6];
+
 export default class App extends Component {
 	render() {
-		return <Page />;
-	}
-}
-class Page extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {showWarning: true};
-		this.handleToggleClick = this.handleToggleClick.bind(this);
-	}
-
-	handleToggleClick() {
-		this.setState(state => ({showWarning: !state.showWarning}))
-	}
-
-	render() {
-		return (
-			<div>
-				<WarningBanner warn={this.state.showWarning}/>
-				<button onClick={this.handleToggleClick}>
-					{this.state.showWarning ? 'Спрятать' : 'Показать'}
-				</button>
-			</div>
-		)
+		return <NumberList numbers={numbers} />;
 	}
 }
 
-function WarningBanner(props) {
-	if (!props.warn) {
-		return null;
-	}
+function NumberList(props) {
+	const numbers = props.numbers;
+	const numberList = numbers.map((number) => <li key={number.toString()}>{number}</li>);
 
-	return (
-		<div className="warning">
-      Предупреждение!
-    </div>
-	)
+	return <ul>{numberList}</ul>;
 }

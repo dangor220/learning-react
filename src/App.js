@@ -253,42 +253,75 @@ import './App.css';
 // 	return <ul>{numberList}</ul>;
 // }
 
-const posts = [
-	{
-		id: 1,
-		title: 'Привет, мир',
-		content: 'Добро пожаловать в документацию React!',
-	},
-	{ id: 2, title: 'Установка', content: 'React можно установить из npm.' },
-];
+// const posts = [
+// 	{
+// 		id: 1,
+// 		title: 'Привет, мир',
+// 		content: 'Добро пожаловать в документацию React!',
+// 	},
+// 	{ id: 2, title: 'Установка', content: 'React можно установить из npm.' },
+// ];
 
-function Blog(props) {
-	const sidebar = (
-		<ul>
-			{props.posts.map((post) => {
-				return <li key={post.id}>{post.title}</li>;
-			})}
-		</ul>
-	);
-	const content = props.posts.map((post) => {
-		return (
-			<div key={post.id}>
-				<h3>{post.title}</h3>
-				<div>{post.content}</div>
-			</div>
-		);
-	});
-	return (
-		<div>
-			{sidebar}
-			<hr />
-			{content}
-		</div>
-	);
-}
+// function Blog(props) {
+// 	const sidebar = (
+// 		<ul>
+// 			{props.posts.map((post) => {
+// 				return <li key={post.id}>{post.title}</li>;
+// 			})}
+// 		</ul>
+// 	);
+// 	const content = props.posts.map((post) => {
+// 		return (
+// 			<div key={post.id}>
+// 				<h3>{post.title}</h3>
+// 				<div>{post.content}</div>
+// 			</div>
+// 		);
+// 	});
+// 	return (
+// 		<div>
+// 			{sidebar}
+// 			<hr />
+// 			{content}
+// 		</div>
+// 	);
+// }
+
+// export default class App extends Component {
+// 	render() {
+// 		return <Blog posts={posts} />;
+// 	}
+// }
+
 
 export default class App extends Component {
 	render() {
-		return <Blog posts={posts} />;
+		return <NameForm />;
+	}
+}
+
+class NameForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {value: ''};
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	handleChange(event) {
+		this.setState({value: event.target.value}) 
+	}
+	handleSubmit(event) {
+		alert('Name user ' + this.state.value);
+		event.preventDefault();
+	}
+
+	render() {
+		return (
+			<form onSubmit={this.handleSubmit}>
+				Name:
+				<input type="text" value={this.state.value} onChange={this.handleChange} />
+				<input type="submit" value="submit"/>
+			</form>
+		)
 	}
 }

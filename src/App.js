@@ -326,44 +326,96 @@ import './App.css';
 // 	}
 // }
 
+// export default class App extends Component {
+// 	render() {
+// 		return <SelectForm />;
+// 	}
+// }
+
+
+// class SelectForm extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {value: 'coconut'};
+
+// 		this.handleChange = this.handleChange.bind(this);
+// 		this.handleSubmit = this.handleSubmit.bind(this);
+// 	}
+
+// 	handleChange(event) {
+// 		this.setState({value: event.target.value})
+// 	}
+// 	handleSubmit(event) {
+// 		alert('Selec default: ' + this.state.value);
+// 		event.preventDefault()
+// 	}
+
+// 	render() {
+// 		return (
+// 			<form onSubmit={this.handleSubmit}>
+// 			<label>
+// 				Select product:
+// 				<select value={this.state.value} onChange={this.handleChange}>
+// 					<option value="grapefruit">Грейпфрут</option>
+// 					<option value="lime">Лайм</option>
+// 					<option value="coconut">Кокос</option>
+// 					<option value="mango">Манго</option>
+// 				</select>
+// 			</label>
+// 				<input type="submit" value="submit"/>
+// 			</form>
+// 		)
+// 	}
+// }
+
 export default class App extends Component {
 	render() {
-		return <SelectForm />;
+		return <Reservation />;
 	}
 }
 
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2
+    };
 
-class SelectForm extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {value: 'coconut'};
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
 
-	handleChange(event) {
-		this.setState({value: event.target.value})
-	}
-	handleSubmit(event) {
-		alert('Selec default: ' + this.state.value);
-		event.preventDefault()
-	}
+    this.setState({
+      [name]: value
+    });
+  }
 
-	render() {
-		return (
-			<form onSubmit={this.handleSubmit}>
-			<label>
-				Select product:
-				<select value={this.state.value} onChange={this.handleChange}>
-					<option value="grapefruit">Грейпфрут</option>
-					<option value="lime">Лайм</option>
-					<option value="coconut">Кокос</option>
-					<option value="mango">Манго</option>
-				</select>
-			</label>
-				<input type="submit" value="submit"/>
-			</form>
-		)
-	}
+  render() {
+    return (
+      <form>
+        <label>
+          Пойдут:
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <label>
+          Количество гостей:
+          <input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange} />
+        </label>
+      </form>
+    );
+  }
 }

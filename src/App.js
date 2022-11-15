@@ -293,7 +293,6 @@ import './App.css';
 // 	}
 // }
 
-
 // export default class App extends Component {
 // 	render() {
 // 		return <NameForm />;
@@ -308,7 +307,7 @@ import './App.css';
 // 		this.handleSubmit = this.handleSubmit.bind(this);
 // 	}
 // 	handleChange(event) {
-// 		this.setState({value: event.target.value}) 
+// 		this.setState({value: event.target.value})
 // 	}
 // 	handleSubmit(event) {
 // 		alert('Name user ' + this.state.value);
@@ -331,7 +330,6 @@ import './App.css';
 // 		return <SelectForm />;
 // 	}
 // }
-
 
 // class SelectForm extends Component {
 // 	constructor(props) {
@@ -368,54 +366,96 @@ import './App.css';
 // 	}
 // }
 
+// export default class App extends Component {
+// 	render() {
+// 		return <Reservation />;
+// 	}
+// }
+
+// class Reservation extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       isGoing: true,
+//       numberOfGuests: 2
+//     };
+
+//     this.handleInputChange = this.handleInputChange.bind(this);
+//   }
+
+//   handleInputChange(event) {
+//     const target = event.target;
+//     const value = target.type === 'checkbox' ? target.checked : target.value;
+//     const name = target.name;
+
+//     this.setState({
+//       [name]: value
+//     });
+//   }
+
+//   render() {
+//     return (
+//       <form>
+//         <label>
+//           Пойдут:
+//           <input
+//             name="isGoing"
+//             type="checkbox"
+//             checked={this.state.isGoing}
+//             onChange={this.handleInputChange} />
+//         </label>
+//         <br />
+//         <label>
+//           Количество гостей:
+//           <input
+//             name="numberOfGuests"
+//             type="number"
+//             value={this.state.numberOfGuests}
+//             onChange={this.handleInputChange} />
+//         </label>
+//       </form>
+//     );
+//   }
+// }
+
 export default class App extends Component {
 	render() {
-		return <Reservation />;
+		return <Calculator />;
 	}
 }
 
-class Reservation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isGoing: true,
-      numberOfGuests: 2
-    };
+function BoilinVerdict(props) {
+	if (props.celsius >= 100) {
+		return <p>Вода закипит!</p>;
+	}
+	return <p>Вода не закипит!</p>;
+}
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
+class Calculator extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { temperature: '' };
+		this.handleChange = this.handleChange.bind(this);
+	}
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+	handleChange(e) {
+		this.setState({ temperature: e.target.value });
+	}
 
-    this.setState({
-      [name]: value
-    });
-  }
+	render() {
+		return (
+			<div>
+				<label>
+					Цельсий:` `
+					<input
+						onChange={this.handleChange}
+						type="number"
+						placeholder={'Введите температуру'}
+					/>
+				</label>
 
-  render() {
-    return (
-      <form>
-        <label>
-          Пойдут:
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={this.state.isGoing}
-            onChange={this.handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Количество гостей:
-          <input
-            name="numberOfGuests"
-            type="number"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange} />
-        </label>
-      </form>
-    );
-  }
+				<BoilinVerdict celsius={this.state.temperature} />
+			</div>
+		);
+	}
 }
